@@ -6,9 +6,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.testng.Assert.assertTrue;
@@ -17,7 +19,7 @@ public class CompareMoreTest extends BaseTest {
 
     private static SearchPage searchPage;
 
-    @BeforeTest
+    @BeforeClass
     public void func () {
         searchPage = new SearchPage(driver);
     }
@@ -34,10 +36,10 @@ public class CompareMoreTest extends BaseTest {
         searchPage.setLocation("Париж");
         List<WebElement> elemPar = searchPage.getLinks();
 
-        for (WebElement elemLonIt : elemLon) {
-            for (WebElement elemParIt : elemPar) {
-                assertTrue(elemLonIt.getText()==elemParIt.getText());
-            }
+        System.out.println(elemLon + " : " + elemPar);
+
+        for (int i = 0; i < elemLon.size(); i++) {
+            assertTrue(elemLon.get(i).getText().equals(elemPar.get(i).getText()));
         }
 
     }
